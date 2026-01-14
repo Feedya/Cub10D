@@ -35,16 +35,14 @@ int get_pixel_from_img(t_image *img, int x, int y)
     return (*(int *)(img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8))));
 }
 
-t_image *find_good_image(t_image *image, char *id)
+t_image *find_good_image(t_image *image, int id)
 {
     int i;
 
     i = 0;
     while (i != 4)
     {
-        printf("direction image :%s:\n", image[i].direction);
-        printf("id : :%s:\n", id);
-        if (comparer_string(image[i].direction, id) == 1)
+        if (image[i].direction == (t_direction)id)
             return (&image[i]);
         i++;
     }
@@ -107,9 +105,9 @@ int raycasting_loop(t_game *game)
         int y = draw_start;
         //savoir quelle coter on touche est west etc...
         ///////////////////////////////////////////////
-        char *id = (game->ray.side == 0) ? 
-           ((game->ray.rayDirX > 0) ? "we" : "ea"): 
-           ((game->ray.rayDirY > 0) ? "no" : "so");
+        int id = (game->ray.side == 0) ? 
+           ((game->ray.rayDirX > 0) ? 3 : 0): 
+           ((game->ray.rayDirY > 0) ? 1 : 2);
         
         t_image *bonne_image = find_good_image(game->wall_images, id);
         if (bonne_image == NULL)

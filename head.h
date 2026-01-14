@@ -25,6 +25,14 @@
 //vitesse de deplacement
 #define MOVE_SPEED 0.1
 
+typedef enum e_direction
+{
+    EAST,  // 0
+    NORTH, // 1
+    SOUTH, // 2
+    WEST   // 3
+} t_direction;
+
 //vitesse de tournage
 #define ROT_SPEED 0.05
 
@@ -92,7 +100,7 @@ typedef struct t_mlx
 
 typedef struct t_image
 {
-    char    *direction;
+    t_direction direction;
     void    *image; //l image que mlx renvoie
     //memoire
     char    *addr;  //adresse de l imge pour pouvoir etre prcis couleur

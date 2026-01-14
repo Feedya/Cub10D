@@ -2,9 +2,6 @@
 
 void    free_game(t_game *game)
 {
-    int i;
-
-    i = 0;
     if (game != NULL)
     {
         if (game->map != NULL)
@@ -58,14 +55,6 @@ void    free_game(t_game *game)
             }
             free(game->wall_texture);
             game->wall_texture = NULL;
-        }
-        while (i < 4)
-        {
-            //free(game->wall_images[i].image);
-            //game->wall_images[i].image = NULL;
-            free(game->wall_images[i].direction);
-            game->wall_images[i].direction = NULL;
-            i++;
         }
         free(game);
         game = NULL;

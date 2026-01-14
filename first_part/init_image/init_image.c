@@ -28,7 +28,7 @@ int init_mlx(t_mlx *mlx_struct)
 }
 
 //cette fonction va open l image et et remplir les truques de la structure 
-int open_image(char *cardinal_points, t_image *image, t_mlx *mlx)
+int open_image(char *cardinal_points, t_image *image, t_mlx *mlx, int dir)
 {
     //la fonction mlx_xpm_file_to_image va remplir toute seule lewidht et le height
     image->image = mlx_xpm_file_to_image(mlx->mlx, cardinal_points, &image->width, &image->height);
@@ -46,12 +46,7 @@ int open_image(char *cardinal_points, t_image *image, t_mlx *mlx)
         printf("la fonction mlx_get_data_addr a bader\n");
         return (1);
     }
-    image->direction = create_string(cardinal_points);
-    if (image->direction == NULL)
-    {
-        printf("malloc a bader dans create_string\n");
-        return (1);
-    }
+    image->direction = dir;
     return (0);
 }
 //------------------------------------------------------------------------------
@@ -124,7 +119,7 @@ int init_image(t_game *game)
 
     while (i != 4)
     {
-        if (open_image(paths[i], &(game->wall_images[i]), game->mlx) == 1)
+        if (open_image(paths[i], &(game->wall_images[i]), game->mlx, i) == 1)
         {
             destroy_all_images(game);
             destroy_mlx(game->mlx);
