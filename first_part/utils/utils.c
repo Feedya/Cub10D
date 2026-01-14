@@ -126,3 +126,19 @@ int ft_atoi(char *str)
     }
     return (nombre * sign);
 }
+
+//si les deux string sont pareille ca renvoie 1
+//sinon 0
+int comparer_string(char *str, char *str_two)
+{
+    int i;
+
+    i = 0;
+    while (str[i] == str_two[i] && str[i] != '\0' && str_two[i] != '\0')
+    {
+        i++;
+    }
+    if (str[i] == '\0' && str_two[i] == '\0')
+        return (1);
+    return (0);
+}

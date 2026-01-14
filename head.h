@@ -28,6 +28,8 @@
 //vitesse de tournage
 #define ROT_SPEED 0.05
 
+#define TEXTURE_LARGEUR 128
+
 typedef struct t_texture
 {
     char *ea;
@@ -210,6 +212,7 @@ void    exit_mit_text(char *str, int number);
 void    free_double_char(char **tab);
 char    *take_string_after_needle(char *file, char *needle);
 int ft_atoi(char *str);
+int comparer_string(char *str, char *str_two);
 
 //MALLOC_UTILS
 

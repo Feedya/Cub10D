@@ -30,6 +30,28 @@ void    my_mlx_pixel_put(t_game *game, int collumns, int collumn_start, int colo
     *(unsigned int*)dst = color;
 }
 
+int get_pixel_from_img(t_image *img, int x, int y)
+{
+    return (*(int *)(img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8))));
+}
+
+t_image *find_good_image(t_image *image, char *id)
+{
+    int i;
+
+    i = 0;
+    while (i != 4)
+    {
+        printf("direction image :%s:\n", image[i].direction);
+        printf("id : :%s:\n", id);
+        if (comparer_string(image[i].direction, id) == 1)
+            return (&image[i]);
+        i++;
+    }
+    return (NULL);
+}
+
+
 int raycasting_loop(t_game *game)
 {
     int i;
@@ -55,17 +77,62 @@ int raycasting_loop(t_game *game)
             wallX = game->player_info->position.f_x + game->ray.perp_wall_dist * game->ray.rayDirX;
         wallX -= floor(wallX);
 
-        //que avec des couleurs
-        /*int line_height = (int)(WINDOW_LONGUEUR/ game->ray.perp_wall_dist);
+        
+        
+        // Imaginons que tes textures font 64x64
+        int texX = (int)(wallX * (double)TEXTURE_LARGEUR);
+        
+        // IMPORTANT : Inverser texX selon la direction pour éviter l'effet miroir
+        if (game->ray.side == 0 && game->ray.rayDirX > 0)
+        texX = TEXTURE_LARGEUR - texX - 1;
+        if (game->ray.side == 1 && game->ray.rayDirY < 0)
+        texX = TEXTURE_LARGEUR - texX - 1;
+
+
+        
+        int line_height = (int)(WINDOW_LONGUEUR/ game->ray.perp_wall_dist);
         int draw_start = -line_height / 2 + WINDOW_LONGUEUR/ 2;
         if (draw_start < 0)
-            draw_start = 0;
+        draw_start = 0;
         int draw_end = line_height / 2 + WINDOW_LONGUEUR / 2;
         if (draw_end >= WINDOW_LONGUEUR)
-            draw_end = WINDOW_LONGUEUR - 1;
+        draw_end = WINDOW_LONGUEUR - 1;
+        
+        
+        double step = 1.0 * TEXTURE_LARGEUR / line_height;
+        double texPos = (draw_start - WINDOW_LONGUEUR / 2 + line_height / 2) * step;
+        
+        
+        
+        int y = draw_start;
+        //savoir quelle coter on touche est west etc...
+        ///////////////////////////////////////////////
+        char *id = (game->ray.side == 0) ? 
+           ((game->ray.rayDirX > 0) ? "we" : "ea"): 
+           ((game->ray.rayDirY > 0) ? "no" : "so");
+        
+        t_image *bonne_image = find_good_image(game->wall_images, id);
+        if (bonne_image == NULL)
+        {
+            printf("on a pas trouver la bonne image\n");
+            exit (1);
+        }
+        /////////////////////////////////////////////////
 
+        while (y < draw_end)
+        {
+            int texY = (int)texPos & (TEXTURE_LARGEUR - 1); 
+            texPos += step;
+            // 2. Récupérer la couleur du pixel dans le XPM
+            int color = get_pixel_from_img(bonne_image, texX, texY);
+
+            // 3. Dessiner le pixel sur ton background
+            my_mlx_pixel_put(game, i, y, color);
+            y++;
+        }
+        
         // DESSIN
-        int color = (game->ray.side == 0) ? 0xFF0000 : 0xAA0000;
+        /*int color = (game->ray.side == 0) ? 0xFF0000 : 0xAA0000;
         int y = draw_start;
         while (y < draw_end)
         {
