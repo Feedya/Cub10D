@@ -19,9 +19,7 @@ char    *malloc_file(char *filename)
     c = 100;
     buffer = ft_calloc(sizeof(char), c + 1);
     if (buffer == NULL)
-    {
         return (NULL);
-    }
     while ((bytes = read(fd, &buffer[i], 1)) > 0)
     {
         i++;

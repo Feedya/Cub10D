@@ -172,7 +172,7 @@ int check_ceiling_and_floor(char *file);
 
 //check filename
 
-int check_filename(char *name);
+void check_filename(char *name);
 
 //----------------------------------------------------------------------------------
 //CREATE_GAME_STRUCT_AND_FILL
@@ -185,7 +185,7 @@ int fill_wall_texture(t_game *game, char *file);
 //PARSING
 //----------------------------------------------------------------------------------
 
-int parsing(t_game *game);
+t_game *parsing(char *file);
 
 void    put_player_information(t_player_view *view, t_player_position *player, char **map);
 

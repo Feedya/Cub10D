@@ -1,6 +1,6 @@
 #include "../../../head.h"
 
-int check_filename(char *filename)
+void check_filename(char *filename)
 {
     char *ending;
     int i;
@@ -19,7 +19,7 @@ int check_filename(char *filename)
     }
     free(ending);
     if (d < 0)
-        return (0);
+        return ;
     printf("le filename doit finire avec .cub\n");
-    return (1);
+    exit(0);
 }

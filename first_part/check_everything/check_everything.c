@@ -1,6 +1,7 @@
 #include "../../head.h"
 
 //checkeur avant de recheck dans la structure game
+//on check les textures
 int check_everything(char *file)
 {
     //check les texture de mur
