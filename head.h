@@ -178,7 +178,7 @@ void check_filename(char *name);
 //CREATE_GAME_STRUCT_AND_FILL
 //----------------------------------------------------------------------------------
 
-t_game  *create_game_struct_and_fill(char **map, char *file);
+t_game  *create_game_struct_and_fill(char *file);
 int fill_wall_texture(t_game *game, char *file);
 
 //----------------------------------------------------------------------------------
@@ -229,8 +229,10 @@ void *ft_calloc(size_t type, size_t taille);
 
 //GAME UTILS
 
-t_game *malloc_game(char **map);
+t_game *malloc_empty_game();
 void    free_game(t_game *game);
+
+int fill_ceiling_floor(t_game *game, char *file);
 
 //MAP UTILS
 

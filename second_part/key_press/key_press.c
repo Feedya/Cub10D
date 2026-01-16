@@ -115,11 +115,11 @@ int    key_press(int keycode, t_game *game)
     {
         move_down(game);
     }
-    else if (keycode == 101)//E
+    else if (keycode == 101 || keycode == 65363)//E
     {
         rotate_droite(game);
     }
-    else if (keycode == 113)//q
+    else if (keycode == 113 || keycode == 65361)//q
     {
         rotate_gauche(game);
     }

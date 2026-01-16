@@ -1,6 +1,6 @@
 #include "../../../head.h"
 
-t_game *malloc_game(char **map)
+t_game *malloc_empty_game()
 {
     t_game *game;
 
@@ -10,7 +10,7 @@ t_game *malloc_game(char **map)
     game->ceiling_floor = NULL;
     game->player_info = NULL;
     game->mlx = NULL;
-    game->map = map;
+    game->map = NULL;
         
     game->mlx = malloc(sizeof(t_mlx));
     if (game->mlx == NULL)

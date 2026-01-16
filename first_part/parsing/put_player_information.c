@@ -81,5 +81,7 @@ void    put_player_information(t_player_view *view, t_player_position *player, c
         }
         i++;
     }
+    printf("ON A PAS TROUVER DE SPAWN POINTS\n");
+    printf("put_player_information.c\n");
     return ;
 }
