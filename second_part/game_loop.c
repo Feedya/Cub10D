@@ -55,6 +55,8 @@ int raycasting_loop(t_game *game)
     int i;
 
     i = 0;
+    if (game->background.image != NULL)
+        mlx_destroy_image(game->mlx->mlx, game->background.image);
     create_background_img(game);
     while (i != WINDOW_LARGEUR)
     {

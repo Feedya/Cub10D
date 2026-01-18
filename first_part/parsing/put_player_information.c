@@ -26,7 +26,7 @@ void    put_player_information(t_player_view *view, t_player_position *player, c
                 view->plane_x = 0.66f;
                 view->plane_y = 0;
                 //map
-                map[i][c] = 'P';//pttr mettre 0 faut voir apres
+                //map[i][c] = 'P';//pttr mettre 0 faut voir apres
                 return ;
             }
             else if (map[i][c] == 'W')
@@ -42,7 +42,7 @@ void    put_player_information(t_player_view *view, t_player_position *player, c
                 view->plane_x = 0;
                 view->plane_y = -0.66f;
                 //map
-                map[i][c] = 'P';
+                //map[i][c] = 'P';
                 return ;
             }
             else if (map[i][c] == 'S')
@@ -58,7 +58,7 @@ void    put_player_information(t_player_view *view, t_player_position *player, c
                 view->plane_x = -0.66f;
                 view->plane_y = 0;
                 //map
-                map[i][c] = 'P';
+                //map[i][c] = 'P';
                 return ;
             }
             else if (map[i][c] == 'E')
@@ -74,7 +74,7 @@ void    put_player_information(t_player_view *view, t_player_position *player, c
                 view->plane_x = 0;
                 view->plane_y = 0.66f;  
                 //map
-                map[i][c] = 'P';
+            //map[i][c] = 'P';
                 return ;
             }
             c++;

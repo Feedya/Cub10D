@@ -20,6 +20,9 @@ int check_charactere_map(char **map)
                 spawn_counter++;
             if (is_character_of_map(map[i][c]) == 0)
             {
+                printf("char : %c\n", map[i][c]);
+                printf("string : %s\n", map[i]);
+                printf("ligne : %d\n", i);
                 printf("Charactere non tolerer dans la map\n");
                 return (1);
             }

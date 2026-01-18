@@ -142,3 +142,15 @@ int comparer_string(char *str, char *str_two)
         return (1);
     return (0);
 }
+
+void    print_double_char(char **map)
+{
+    int i;
+
+    i = 0;
+    while (map[i] != NULL)
+    {
+        printf("%s\n", map[i]);
+        i++;
+    }
+}

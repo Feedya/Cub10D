@@ -221,6 +221,7 @@ void    free_double_char(char **tab);
 char    *take_string_after_needle(char *file, char *needle);
 int ft_atoi(char *str);
 int comparer_string(char *str, char *str_two);
+void    print_double_char(char **map);
 
 //MALLOC_UTILS
 

@@ -12,12 +12,12 @@ void    destroy_all_images(t_game *game)
             if (game->wall_images[i].image != NULL)
             {
                 mlx_destroy_image(game->mlx->mlx, game->wall_images[i].image);
-                i++;
             }
             i++;
         }
     }
-    mlx_destroy_image(game->mlx->mlx, game->background.image);
+    if (game->background.image != NULL)
+        mlx_destroy_image(game->mlx->mlx, game->background.image);
 }
 
 void    destroy_mlx(t_mlx *mlx_struct)

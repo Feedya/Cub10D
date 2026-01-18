@@ -2,21 +2,10 @@
 
 int fill_game(t_game *game, char *file)
 {
-    char **new_map;
     char **map = take_map_from_file(file);
     if (map == NULL)
         return (1);
-
-    //checkeur de map et remplissage des espaces
-    new_map = check_map(map);
-    if (new_map == NULL)
-    {
-        printf("malloc a bader ou\n");
-        printf("la map n est pas bonne\n");
-        return (1);
-    }
-    free_double_char(map);
-    game->map = new_map;
+    game->map = map;
 
     if (fill_wall_texture(game, file) == 1)
     {
@@ -39,17 +28,31 @@ int fill_game(t_game *game, char *file)
         printf("parsing\n");
         return (1);
     }
-    //on check les rgb
+    //on met les informations du player ou est ce qu il se trouve
+    put_player_information(&(game->player_info->view), &(game->player_info->position), game->map);
+    return (0);
+}
+
+bool check_game(t_game *game)
+{
+    char **new_map;
+
+    new_map = check_map(game->map);
+    if (new_map == NULL)
+    {
+        printf("malloc a bader ou\n");
+        printf("la map n est pas bonne\n");
+        return (false);
+    }
+    free_double_char(game->map);
+    game->map = new_map;
     if (check_RGB(game->ceiling_floor->ceiling,
                 game->ceiling_floor->floor) == 1)
     {
         printf("probleme dans RGB de ceiling soit floor\n");
-        return (1);
+        return (false);
     }
-
-    //on met les informations du player ou est ce qu il se trouve
-    put_player_information(&(game->player_info->view), &(game->player_info->position), game->map);
-    return (0);
+    return (true);
 }
 
 t_game *parsing(char *file)
@@ -63,7 +66,6 @@ t_game *parsing(char *file)
     //checker les couleurs du toit et du sol
 	if (check_ceiling_and_floor(file) == 1)
     	return (NULL);
-
     game = malloc_empty_game();
     if (game == NULL)
     {
@@ -76,6 +78,11 @@ t_game *parsing(char *file)
         printf("probleme fans fill_game avec malloc\n");
         free(file);
         free_game(game);
+        return (NULL);
+    }
+    if (check_game(game) == false)
+    {
+        printf("probleme dans le check_game\n");
         return (NULL);
     }
 
